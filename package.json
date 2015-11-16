@@ -1,0 +1,28 @@
+{
+  "name": "stormbringer",
+  "version": "0.1.1",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test:unit",
+    "lint": "gulp lint:js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "*",
+    "chai": "*",
+    "eslint": "*",
+    "eslint-plugin-mocha": "*",
+    "gulp": "*",
+    "gulp-eslint": "*",
+    "gulp-mocha": "*",
+    "gulp-rename": "*",
+    "gulp-util": "*",
+    "min-document": "^2.17.0",
+    "mocha": "*",
+    "require-directory": "*",
+    "vinyl-source-stream": "*",
+    "watchify": "*"
+  }
+}
