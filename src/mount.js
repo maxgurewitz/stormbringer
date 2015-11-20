@@ -4,7 +4,7 @@ var patch = require('virtual-dom/vdom/patch');
 var create = require('virtual-dom/vdom/create-element');
 var domDelegator = require('dom-delegator');
 
-module.exports = function app(args) {
+module.exports = function mount(args) {
   var listenTo = args.listenTo || [];
 
   var loop = mainLoop(args.model, args.render, {
@@ -18,10 +18,10 @@ module.exports = function app(args) {
     delegator.listenTo(listenTo[i]);
   }
 
-  args.dispatcher.onUpdate(function (model) {
-    loop.update(model, args.dispatcher);
+  args.store.onUpdate(function (model) {
+    loop.update(model);
   });
 
   args.el.appendChild(loop.target);
-  return args.dispatcher;
+  return args.store;
 };
