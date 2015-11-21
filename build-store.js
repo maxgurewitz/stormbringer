@@ -1,7 +1,12 @@
 var eventEmitter = require('event-emitter');
+var reduce = require('reduce');
 
 module.exports = function buildStore(args) {
   var emitter = eventEmitter();
+
+  var send = function send(action) {
+    emitter.emit('action', action);
+  };
 
   var onAction = function onAction(listener) {
     emitter.on('action', listener);
@@ -9,10 +14,6 @@ module.exports = function buildStore(args) {
 
   var onUpdate = function onUpdate(listener) {
     emitter.on('update', listener);
-  };
-
-  var send = function send(action) {
-    emitter.emit('action', action);
   };
 
   var store = {
