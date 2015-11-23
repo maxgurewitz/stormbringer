@@ -1,5 +1,5 @@
 var helpers = require(__BASE + '/test/helpers');
-var buildStore = require(__BASE + '/src/buildStore');
+var buildStore = require(__BASE + '/build-store');
 
 var expect = helpers.expect;
 
