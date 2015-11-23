@@ -2,6 +2,7 @@ var mainLoop = require('main-loop');
 var diff = require('virtual-dom/vtree/diff');
 var patch = require('virtual-dom/vdom/patch');
 var create = require('virtual-dom/vdom/create-element');
+var createModelProperty = require('./create-model-property');
 
 module.exports = function mount(args) {
   var listenTo = args.listenTo || [];
@@ -9,18 +10,13 @@ module.exports = function mount(args) {
   var loop = mainLoop(args.store, args.render, {
     diff: diff,
     patch: patch,
-    create: create
+    create: create,
+    document: args.document
   });
 
-  var illegalSetMessage = 'Cannot mutate model while in render function.';
-  var viewCompatibleStore = Object.create({
-      send: args.store.send
-    }, {
-      model: {
-        get: function() { return args.store.model; },
-        set: function() { throw new Error(illegalSetMessage); }
-      }
-    });
+  var viewCompatibleStore = createModelProperty({
+    send: args.store.send
+  }, args.store.model);
 
   args.store.onUpdate(function () {
     loop.update(viewCompatibleStore);
