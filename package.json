@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "license": "MIT",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxgurewitz/stormbringer.git"
+  },
   "scripts": {
     "test": "gulp test:unit",
     "lint": "gulp lint:js"
