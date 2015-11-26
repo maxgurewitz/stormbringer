@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "dom-delegator": "^13.1.0",
+    "event-emitter": "^0.3.4",
     "main-loop": "^3.2.0",
-    "reduce": "^1.0.1",
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {
