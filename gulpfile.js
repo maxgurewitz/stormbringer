@@ -16,5 +16,3 @@ Object.keys(taskFiles).forEach(function(taskFileName) {
     });
   });
 });
-
-gulp.task('default', ['bundle:watch']);
