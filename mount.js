@@ -2,26 +2,22 @@ var mainLoop = require('main-loop');
 var diff = require('virtual-dom/vtree/diff');
 var patch = require('virtual-dom/vdom/patch');
 var create = require('virtual-dom/vdom/create-element');
-var createModelProperty = require('./create-model-property');
 
 module.exports = function mount(args) {
-  var listenTo = args.listenTo || [];
+  var store = { send: args.actionEmitter.send, model: args.model };
 
-  var loop = mainLoop(args.store, args.render, {
+  var loop = mainLoop(store, args.render, {
     diff: diff,
     patch: patch,
     create: create,
     document: args.document
   });
 
-  var viewCompatibleStore = createModelProperty({
-    send: args.store.send
-  }, args.store.model);
-
-  args.store.onUpdate(function () {
-    loop.update(viewCompatibleStore);
+  args.actionEmitter.listen(function(action) {
+    args.model = args.update(args.model, action);
+    loop.update({ send: args.actionEmitter.send, model: args.model });
   });
 
   args.el.appendChild(loop.target);
-  return args.store;
-};
+  return args;
+}
